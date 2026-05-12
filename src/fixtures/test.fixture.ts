@@ -26,7 +26,11 @@ export const test = baseTest.extend<CustomFixtures>({
     await allure.epic(pillar);
     await allure.feature(fileName);
     await allure.story(testInfo.title);
+    
+    // Organização de Suítes para evitar duplicação por navegador
     await allure.parentSuite(pillar);
+    await allure.suite(fileName);
+    await allure.subSuite(testInfo.project.name);
 
     const loginPage = new LoginPage(page, env.UI_BASE_URL);
     
@@ -56,7 +60,11 @@ export const test = baseTest.extend<CustomFixtures>({
     await allure.epic(pillar);
     await allure.feature(fileName);
     await allure.story(testInfo.title);
+    
+    // Organização de Suítes para evitar duplicação por navegador
     await allure.parentSuite(pillar);
+    await allure.suite(fileName);
+    await allure.subSuite(testInfo.project.name);
 
     const authService = new AuthService(request, env.API_BASE_URL);
     
@@ -79,7 +87,11 @@ export const test = baseTest.extend<CustomFixtures>({
     await allure.epic(pillar);
     await allure.feature(fileName);
     await allure.story(testInfo.title);
+    
+    // Organização de Suítes para evitar duplicação por navegador
     await allure.parentSuite(pillar);
+    await allure.suite(fileName);
+    await allure.subSuite(testInfo.project.name);
 
     const service = new BookingService(request, env.API_BASE_URL);
     await use(service);
