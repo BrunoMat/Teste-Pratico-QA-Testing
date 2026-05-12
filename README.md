@@ -77,5 +77,16 @@ npm run allure:open
 
 Integrado com **GitHub Actions**. O pipeline executa a suíte completa, utiliza **GitHub Secrets** para credenciais e faz o deploy automático do relatório consolidado no **GitHub Pages**.
 
+## 🧪 Notas sobre Testes Visuais (Visual Regression)
+
+Os testes de regressão visual (`visual.spec.ts`) podem falhar na primeira execução em ambientes de CI (GitHub Actions) com a mensagem: `A snapshot doesn't exist... writing actual`. 
+
+**Isso é o comportamento esperado**, pois o Playwright exige imagens de base específicas para cada Sistema Operacional (Windows vs Linux).
+
+**Como resolver:**
+1. No GitHub Actions, baixe o artefato `test-results` da execução que falhou.
+2. Copie os arquivos da pasta `visual.spec.ts-snapshots` para o seu diretório local.
+3. Realize o commit dessas imagens. As execuções subsequentes ficarão "verdes".
+
 ---
-*Projeto desenvolvido com as melhores práticas de Engenharia de Qualidade e Segurança.*
+*Projeto desenvolvido como parte do desafio técnico para QA Engineer Senior.*

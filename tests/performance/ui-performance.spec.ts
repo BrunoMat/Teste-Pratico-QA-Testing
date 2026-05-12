@@ -14,9 +14,9 @@ test.describe('@ui Performance de Interface (SLA)', () => {
   });
 
   test('deve medir o tempo de resposta do login', async ({ loginPage, page, context }) => {
+    await page.goto(env.UI_BASE_URL);
     await context.clearCookies();
     await page.evaluate(() => window.localStorage.clear());
-    await page.evaluate(() => window.sessionStorage.clear());
     
     await loginPage.navigate();
     
