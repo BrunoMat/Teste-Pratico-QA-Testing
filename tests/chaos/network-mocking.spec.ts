@@ -18,8 +18,8 @@ test.describe('@ui Chaos Engineering - Mocking de Rede', () => {
     await inventoryPage.goToCart();
     await cartPage.goToCheckout();
 
-    await checkoutPage.fillCheckoutInfo('Chaos', 'User', '12345');
-    await checkoutPage.finishCheckout();
+    await checkoutPage.fillInformation('Chaos', 'User', '12345');
+    await checkoutPage.finish();
 
     expect(await checkoutPage.getSuccessMessage()).toBe('Thank you for your order!');
   });

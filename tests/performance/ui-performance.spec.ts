@@ -13,8 +13,11 @@ test.describe('@ui Performance de Interface (SLA)', () => {
     expect(duration, `Página demorou ${duration}ms para carregar, acima do SLA de 2s`).toBeLessThan(2000);
   });
 
-  test('deve medir o tempo de resposta do login', async ({ loginPage, page }) => {
-    test.use({ storageState: { cookies: [], origins: [] } });
+  test('deve medir o tempo de resposta do login', async ({ loginPage, page, context }) => {
+    await context.clearCookies();
+    await page.evaluate(() => window.localStorage.clear());
+    await page.evaluate(() => window.sessionStorage.clear());
+    
     await loginPage.navigate();
     
     const startTime = Date.now();
