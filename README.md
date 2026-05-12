@@ -1,10 +1,10 @@
-# 🚀 QA Automation Challenge - Senior Framework
+# 🚀 QA Automation Challenge - QA Enginner Senior
 
 Este projeto é uma solução de automação de testes de alto nível, cobrindo testes de **Interface (UI)** e **API**, construído com **Playwright**, **TypeScript** e **Allure Report**.
 
 ---
 
-## 🏗️ Estratégia de Cobertura (72 Cenários)
+## 🏗️ Estratégia de Cobertura
 
 O framework foi desenhado para oferecer **Exposição Total** da qualidade através de 6 projetos simultâneos:
 - **Chromium** (Desktop Chrome)
@@ -18,7 +18,7 @@ Totalizando mais de **72 execuções por ciclo**, garantindo compatibilidade tot
 
 ---
 
-## 💎 Diferenciais Sênior (Nível 2+)
+## 💎 Diferenciais
 
 1.  **👁️ Regressão Visual**: Validação de integridade de layout via Screenshots (Pixel-to-Pixel Comparison).
 2.  **🔌 Validação de Contrato**: Uso de `Zod` para garantir que o esquema JSON da API nunca mude sem aviso.
