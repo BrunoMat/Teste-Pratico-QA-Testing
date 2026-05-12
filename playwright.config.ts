@@ -6,10 +6,10 @@ dotenv.config();
 
 export default defineConfig({
   testDir: './tests',
-  fullyParallel: false, 
+  fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: 0,
-  workers: 2, 
+  workers: 2,
   timeout: 60000,
   expect: {
     timeout: 10000,
@@ -33,29 +33,53 @@ export default defineConfig({
 
   projects: [
     {
+      name: 'setup',
+      testMatch: /.*\.setup\.ts/,
+    },
+    {
       name: 'Chromium',
-      use: { ...devices['Desktop Chrome'] },
-      testIgnore: /api\/.*spec\.ts|security\/.*spec\.ts|performance\/.*spec\.ts/,
+      use: { 
+        ...devices['Desktop Chrome'],
+        storageState: '.auth/user.json',
+      },
+      dependencies: ['setup'],
+      testIgnore: /api\/.*spec\.ts|security\/.*spec\.ts|performance\/.*spec\.ts|.*\.setup\.ts/,
     },
     {
       name: 'Firefox',
-      use: { ...devices['Desktop Firefox'] },
-      testIgnore: /api\/.*spec\.ts|security\/.*spec\.ts|performance\/.*spec\.ts/,
+      use: { 
+        ...devices['Desktop Firefox'],
+        storageState: '.auth/user.json',
+      },
+      dependencies: ['setup'],
+      testIgnore: /api\/.*spec\.ts|security\/.*spec\.ts|performance\/.*spec\.ts|.*\.setup\.ts/,
     },
     {
       name: 'Webkit',
-      use: { ...devices['Desktop Safari'] },
-      testIgnore: /api\/.*spec\.ts|security\/.*spec\.ts|performance\/.*spec\.ts/,
+      use: { 
+        ...devices['Desktop Safari'],
+        storageState: '.auth/user.json',
+      },
+      dependencies: ['setup'],
+      testIgnore: /api\/.*spec\.ts|security\/.*spec\.ts|performance\/.*spec\.ts|.*\.setup\.ts/,
     },
     {
       name: 'Mobile-Chrome',
-      use: { ...devices['Pixel 5'] },
-      testIgnore: /api\/.*spec\.ts|security\/.*spec\.ts|performance\/.*spec\.ts/,
+      use: { 
+        ...devices['Pixel 5'],
+        storageState: '.auth/user.json',
+      },
+      dependencies: ['setup'],
+      testIgnore: /api\/.*spec\.ts|security\/.*spec\.ts|performance\/.*spec\.ts|.*\.setup\.ts/,
     },
     {
       name: 'Mobile-Safari',
-      use: { ...devices['iPhone 12'] },
-      testIgnore: /api\/.*spec\.ts|security\/.*spec\.ts|performance\/.*spec\.ts/,
+      use: { 
+        ...devices['iPhone 12'],
+        storageState: '.auth/user.json',
+      },
+      dependencies: ['setup'],
+      testIgnore: /api\/.*spec\.ts|security\/.*spec\.ts|performance\/.*spec\.ts|.*\.setup\.ts/,
     },
     {
       name: 'API',

@@ -53,7 +53,11 @@ test.describe('@api Operações CRUD de Reservas', () => {
   });
 
   test('deve atualizar completamente a reserva', async ({ bookingService }) => {
-    expect(bookingId).toBeDefined();
+    if (!bookingId) {
+      const result = await bookingService.createValidBooking(new BookingBuilder().build());
+      bookingId = result.bookingid;
+    }
+    
     bookingService.setAuthorizationHeader(token);
 
     const updatedData = new BookingBuilder().withFirstname('UpdatedName').build();
@@ -65,7 +69,11 @@ test.describe('@api Operações CRUD de Reservas', () => {
   });
 
   test('deve atualizar parcialmente a reserva', async ({ bookingService }) => {
-    expect(bookingId).toBeDefined();
+    if (!bookingId) {
+      const result = await bookingService.createValidBooking(new BookingBuilder().build());
+      bookingId = result.bookingid;
+    }
+
     bookingService.setAuthorizationHeader(token);
 
     const patchData = { firstname: 'PatchedName' };
@@ -102,7 +110,11 @@ test.describe('@api Operações CRUD de Reservas', () => {
   });
 
   test('deve remover a reserva', async ({ bookingService }) => {
-    expect(bookingId).toBeDefined();
+    if (!bookingId) {
+      const result = await bookingService.createValidBooking(new BookingBuilder().build());
+      bookingId = result.bookingid;
+    }
+
     bookingService.setAuthorizationHeader(token);
 
     const response = await bookingService.deleteBooking(bookingId);

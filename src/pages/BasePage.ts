@@ -1,4 +1,5 @@
 import { Page, Locator } from '@playwright/test';
+import * as allure from 'allure-js-commons';
 
 export abstract class BasePage {
   readonly page: Page;
@@ -9,40 +10,31 @@ export abstract class BasePage {
     this.url = url;
   }
 
-  /**
-   * Navega para a URL da página.
-   */
-  async navigate(): Promise<void> {
-    await this.page.goto(this.url);
-    await this.waitForLoadState();
+  async navigate(path: string = ''): Promise<void> {
+    await allure.step(`Navegando para: ${this.url}${path}`, async () => {
+      await this.page.goto(`${this.url}${path}`);
+      await this.waitForLoadState();
+    });
   }
 
-  /**
-   * Aguarda o carregamento completo da rede e do DOM.
-   */
   async waitForLoadState(): Promise<void> {
     await this.page.waitForLoadState('domcontentloaded');
   }
 
-  /**
-   * Clica no elemento com espera automática e validação de visibilidade.
-   */
-  async clickElement(locator: Locator): Promise<void> {
-    await locator.waitFor({ state: 'visible' });
-    await locator.click();
+  async clickElement(locator: Locator, description: string): Promise<void> {
+    await allure.step(`Clicar em: ${description}`, async () => {
+      await locator.waitFor({ state: 'visible' });
+      await locator.click();
+    });
   }
 
-  /**
-   * Fill input element with automatic clear and wait
-   */
-  async fillElement(locator: Locator, text: string): Promise<void> {
-    await locator.waitFor({ state: 'visible' });
-    await locator.fill(text);
+  async fillElement(locator: Locator, text: string, description: string): Promise<void> {
+    await allure.step(`Preencher '${description}' com: ${description.toLowerCase().includes('senha') ? '********' : text}`, async () => {
+      await locator.waitFor({ state: 'visible' });
+      await locator.fill(text);
+    });
   }
 
-  /**
-   * Get text content from element
-   */
   async getText(locator: Locator): Promise<string> {
     await locator.waitFor({ state: 'visible' });
     return (await locator.textContent()) || '';

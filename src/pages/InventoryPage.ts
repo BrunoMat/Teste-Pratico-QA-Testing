@@ -29,15 +29,11 @@ export class InventoryPage extends BasePage {
   }
 
   async addProductToCart(productName: string): Promise<void> {
-    const formattedName = productName.toLowerCase().replace(/ /g, '-');
-    const button = this.page.locator(`#add-to-cart-${formattedName}`);
-    await this.clickElement(button);
+    await this.clickElement(this.page.locator(`//div[text()="${productName}"]/ancestor::div[@class="inventory_item"]//button`), `Adicionar ao carrinho: ${productName}`);
   }
 
   async removeProductFromCart(productName: string): Promise<void> {
-    const formattedName = productName.toLowerCase().replace(/ /g, '-');
-    const button = this.page.locator(`#remove-${formattedName}`);
-    await this.clickElement(button);
+    await this.clickElement(this.page.locator(`//div[text()="${productName}"]/ancestor::div[@class="inventory_item"]//button`), `Remover do carrinho: ${productName}`);
   }
 
   async getCartCount(): Promise<number> {
@@ -48,11 +44,11 @@ export class InventoryPage extends BasePage {
   }
 
   async logout(): Promise<void> {
-    await this.page.locator('#react-burger-menu-btn').click();
-    await this.page.locator('#logout_sidebar_link').click();
+    await this.clickElement(this.page.locator('#react-burger-menu-btn'), 'Menu lateral');
+    await this.clickElement(this.page.locator('#logout_sidebar_link'), 'Link de Logout');
   }
 
   async goToCart(): Promise<void> {
-    await this.clickElement(this.cartIcon);
+    await this.clickElement(this.cartIcon, 'Ícone do Carrinho');
   }
 }

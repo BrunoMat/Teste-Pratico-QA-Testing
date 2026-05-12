@@ -21,15 +21,15 @@ export class CheckoutPage extends BasePage {
     this.errorMessage = page.locator('[data-test="error"]');
   }
 
-  async fillCheckoutInfo(firstName: string, lastName: string, postalCode: string): Promise<void> {
-    await this.fillElement(this.firstNameInput, firstName);
-    await this.fillElement(this.lastNameInput, lastName);
-    await this.fillElement(this.postalCodeInput, postalCode);
-    await this.clickElement(this.continueButton);
+  async fillInformation(firstName: string, lastName: string, postalCode: string): Promise<void> {
+    await this.fillElement(this.firstNameInput, firstName, 'Nome');
+    await this.fillElement(this.lastNameInput, lastName, 'Sobrenome');
+    await this.fillElement(this.postalCodeInput, postalCode, 'CEP');
+    await this.clickElement(this.continueButton, 'Botão Continuar');
   }
 
-  async finishCheckout(): Promise<void> {
-    await this.clickElement(this.finishButton);
+  async finish(): Promise<void> {
+    await this.clickElement(this.finishButton, 'Botão Finalizar');
   }
 
   async getSuccessMessage(): Promise<string> {

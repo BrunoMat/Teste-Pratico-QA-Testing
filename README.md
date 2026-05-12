@@ -25,6 +25,7 @@ Totalizando mais de **72 execuções por ciclo**, garantindo compatibilidade tot
 3.  **⚡ UI Performance SLA**: Auditoria automática de tempos de carregamento de página e processamento de login.
 4.  **♿ Acessibilidade WCAG**: Auditorias completas via `axe-core`.
 5.  **🌀 Chaos Engineering**: Simulação de queda de CDN (assets/imagens) para validar resiliência do sistema.
+6.  **🔐 Autenticação Global**: Reaproveitamento de estado de sessão (Storage State) para máxima performance.
 
 ---
 

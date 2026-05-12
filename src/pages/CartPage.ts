@@ -14,7 +14,7 @@ export class CartPage extends BasePage {
   }
 
   async goToCheckout(): Promise<void> {
-    await this.clickElement(this.checkoutButton);
+    await this.clickElement(this.checkoutButton, 'Botão de Checkout');
   }
 
   async getCartItemsCount(): Promise<number> {

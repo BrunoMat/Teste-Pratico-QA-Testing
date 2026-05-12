@@ -3,13 +3,11 @@ import { env } from '../../config/environments';
 
 test.describe('@ui Chaos Engineering - Mocking de Rede', () => {
   
-  test.beforeEach(async ({ loginPage }) => {
-    await loginPage.navigate();
-    await loginPage.login(env.STANDARD_USER, env.VALID_PASSWORD);
+  test.beforeEach(async ({ inventoryPage }) => {
+    await inventoryPage.navigate();
   });
 
   test('deve permitir finalizar a compra mesmo com falha no carregamento de imagens (CDN Down)', async ({ inventoryPage, cartPage, checkoutPage, page }) => {
-    // Intercepta apenas imagens para simular queda de CDN de assets
     await page.route('**/*.{png,jpg,jpeg,svg}', route => route.fulfill({ status: 404 }));
 
     await inventoryPage.navigate();

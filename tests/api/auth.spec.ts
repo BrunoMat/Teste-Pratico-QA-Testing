@@ -12,14 +12,12 @@ test.describe('@api API de Autenticação', () => {
     expect(typeof token).toBe('string');
   });
 
-  test('deve retornar 200 porém sem token com credenciais inválidas', async ({ authService }) => {
+  test('deve retornar 401 Unauthorized com credenciais inválidas', async ({ authService }) => {
     const response = await authService.post('/auth', {
       username: 'invalid',
       password: 'password123',
     });
     
-    expect(response.status()).toBe(200);
-    const body = await response.json();
-    expect(body).toHaveProperty('reason', 'Bad credentials');
+    expect(response.status()).toBe(401);
   });
 });

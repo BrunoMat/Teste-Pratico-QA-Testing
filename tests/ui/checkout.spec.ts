@@ -2,13 +2,12 @@ import { test, expect } from '../../src/fixtures/test.fixture';
 import { env } from '../../config/environments';
 import { faker } from '@faker-js/faker';
 import * as allure from 'allure-js-commons';
+import { PRODUCT_NAMES, ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../src/constants/test-data';
 
 test.describe('@ui Testes de Fluxo de Checkout', () => {
-  test.beforeEach(async ({ loginPage, inventoryPage }) => {
-    await loginPage.navigate();
-    await loginPage.login(env.STANDARD_USER, env.VALID_PASSWORD);
+  test.beforeEach(async ({ inventoryPage }) => {
     await inventoryPage.navigate();
-    await inventoryPage.addProductToCart('Sauce Labs Backpack');
+    await inventoryPage.addProductToCart(PRODUCT_NAMES.BACKPACK);
     await inventoryPage.goToCart();
   });
 
@@ -20,23 +19,24 @@ test.describe('@ui Testes de Fluxo de Checkout', () => {
     expect(await cartPage.getCartItemsCount()).toBe(1);
     await cartPage.goToCheckout();
 
-    await checkoutPage.fillCheckoutInfo(
+    await checkoutPage.fillInformation(
       faker.person.firstName(),
       faker.person.lastName(),
       faker.location.zipCode()
     );
 
     await expect(page).toHaveURL(/.*checkout-step-two.html/);
-    await checkoutPage.finishCheckout();
+    await checkoutPage.finish();
 
     await expect(page).toHaveURL(/.*checkout-complete.html/);
-    expect(await checkoutPage.getSuccessMessage()).toBe('Thank you for your order!');
+    expect(await checkoutPage.getSuccessMessage()).toBe(SUCCESS_MESSAGES.CHECKOUT_COMPLETE);
   });
 
-  test('deve exibir erro se as informações de checkout estiverem faltando', async ({ cartPage, checkoutPage }) => {
+  test('deve exibir erro se as informações de checkout estiverem faltando', async ({ cartPage, checkoutPage, page }) => {
     await cartPage.goToCheckout();
-    await checkoutPage.clickElement(checkoutPage.continueButton);
+    await checkoutPage.clickElement(checkoutPage.continueButton, 'Botão Continuar');
+    await page.screenshot({ path: 'test-results/screenshots/checkout-error-missing-info.png' });
     const errorMsg = await checkoutPage.getErrorMessage();
-    expect(errorMsg).toContain('Error: First Name is required');
+    expect(errorMsg).toContain(ERROR_MESSAGES.FIRST_NAME_REQUIRED);
   });
 });

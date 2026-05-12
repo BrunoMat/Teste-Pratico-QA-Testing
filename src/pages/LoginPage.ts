@@ -16,9 +16,9 @@ export class LoginPage extends BasePage {
   }
 
   async login(username: string, password: string): Promise<void> {
-    await this.fillElement(this.usernameInput, username);
-    await this.fillElement(this.passwordInput, password);
-    await this.clickElement(this.loginButton);
+    await this.fillElement(this.usernameInput, username, 'Usuário');
+    await this.fillElement(this.passwordInput, password, 'Senha');
+    await this.clickElement(this.loginButton, 'Botão de Login');
   }
 
   async getErrorMessage(): Promise<string> {

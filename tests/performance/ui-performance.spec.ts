@@ -14,6 +14,7 @@ test.describe('@ui Performance de Interface (SLA)', () => {
   });
 
   test('deve medir o tempo de resposta do login', async ({ loginPage, page }) => {
+    test.use({ storageState: { cookies: [], origins: [] } });
     await loginPage.navigate();
     
     const startTime = Date.now();
@@ -22,6 +23,6 @@ test.describe('@ui Performance de Interface (SLA)', () => {
     const duration = Date.now() - startTime;
 
     console.log(`Login processado em ${duration}ms`);
-    expect(duration).toBeLessThan(3000); // Login deve ser processado em menos de 3s
+    expect(duration).toBeLessThan(3000);
   });
 });
