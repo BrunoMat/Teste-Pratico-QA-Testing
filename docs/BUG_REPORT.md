@@ -45,11 +45,11 @@ Este documento detalha as inconsistências encontradas durante a execução da s
 
 ## 🎨 Bugs de UI (Sauce Demo)
 
-### 🔴 BUG-UI-006: Violações de Acessibilidade WCAG 2.1
+### 🔴 BUG-UI-006: Violações de Acessibilidade em Todo o Fluxo (E2E)
 - **Severidade**: Alta
 - **Localização**: `tests/accessibility/ui-acessibility.spec.ts`
-- **Descrição**: Foram encontradas violações críticas de conformidade (contraste, nomes acessíveis em botões e falta de landmarks principais).
-- **Evidência**: Relatório detalhado anexado no Allure (Axe-core JSON).
+- **Descrição**: Foram encontradas múltiplas violações críticas de conformidade (WCAG 2.1) em todas as etapas da jornada (Login, Inventário, Carrinho e Checkout). Problemas incluem baixo contraste, falta de landmarks e nomes acessíveis ausentes em botões de ação.
+- **Evidência**: Relatórios JSON detalhados para cada etapa anexados ao Allure.
 
 ### 🔵 BUG-UI-007: Falha de Integridade de Imagens (Problem User)
 - **Severidade**: Menor (Visual)

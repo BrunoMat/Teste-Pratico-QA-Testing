@@ -1,23 +1,38 @@
-# Sugestões de Melhorias Futuras
+# 🚀 Sugestões de Melhorias Futuras
 
-Este documento descreve as evoluções que eu sugiro para este framework de automação, visando aumentar a cobertura, estabilidade e a observabilidade em um cenário de crescimento do produto.
+Este documento descreve as evoluções sugeridas para o framework, visando escalabilidade e maturidade tecnológica.
 
-### 1. Testes de Regressão Visual (Visual Comparison)
-*   **Oportunidade**: Garantir que as mudanças de CSS ou novos deploys não quebrem o layout do Sauce Demo de forma imperceptível aos locators funcionais.
-*   **Ação**: Integrar o `playwright-visual-regression` ou ferramentas como Applitools/Percy para comparar snapshots de páginas críticas.
+---
 
-### 2. Monitoramento e Alerta em Tempo Real
-*   **Oportunidade**: Notificar o time de desenvolvimento imediatamente após uma falha no pipeline de CI/CD.
-*   **Ação**: Adicionar webhooks no GitHub Actions para enviar os resultados dos testes e o link do relatório HTML diretamente para canais do Slack ou Microsoft Teams.
+### ✅ Implementado nesta Versão (Diferenciais)
+- **Regressão Visual**: Integração nativa com `toHaveScreenshot`.
+- **Autenticação Global**: Otimização de performance via `storageState`.
+- **Chaos Engineering**: Mocking de rede para testes de resiliência.
+- **Acessibilidade Full-Flow**: Auditorias WCAG do login ao checkout.
 
-### 3. Externalização de Massa de Dados (Data-Driven)
-*   **Oportunidade**: Executar o mesmo fluxo de teste com centenas de combinações diferentes sem duplicar código.
-*   **Ação**: Criar uma camada de integração para ler dados de arquivos CSV ou arquivos JSON externos, permitindo que analistas de negócio também criem novos cenários apenas atualizando planilhas.
+---
 
-### 4. Integração com Gestão de Testes (Jira/Xray/TestRail)
-*   **Oportunidade**: Centralizar os resultados dos testes automatizados junto aos testes manuais para uma visão única da saúde do projeto.
-*   **Ação**: Utilizar APIs dessas ferramentas para fazer o "upload" automático dos resultados do Playwright após cada execução do CI.
+### 📈 Roadmap de Evolução
 
-### 5. Dockerização do Ambiente
-*   **Oportunidade**: Garantir que "na minha máquina funciona" nunca seja um problema.
-*   **Ação**: Criar um `Dockerfile` para a execução dos testes, garantindo que as versões de navegadores e dependências de sistema sejam idênticas em qualquer ambiente (Local, Jenkins, GitHub).
+#### 1. Performance de Carga (Load Testing)
+- **Oportunidade**: Validar como a API do Restful-Booker se comporta sob alto volume de usuários simultâneos.
+- **Ação**: Integrar ferramentas como **K6** ou **Artillery**, reaproveitando os scripts de API já criados em TypeScript.
+
+#### 2. Segurança Dinâmica (DAST)
+- **Oportunidade**: Detectar vulnerabilidades de segurança conhecidas (OWASP Top 10) durante a execução dos testes.
+- **Ação**: Integrar o **OWASP ZAP** ao pipeline de CI/CD para realizar scans passivos e ativos nos endpoints da API.
+
+#### 3. Testes em Nuvem (Grid Scalability)
+- **Oportunidade**: Executar centenas de testes simultâneos em múltiplos sistemas operacionais (Windows, macOS, Android Real Devices).
+- **Ação**: Integrar o Playwright com provedores de nuvem como **BrowserStack** ou **LambdaTest**.
+
+#### 4. IA para Manutenção de Seletores (Self-Healing)
+- **Oportunidade**: Reduzir a flakiness dos testes de UI quando os IDs ou classes mudam no front-end.
+- **Ação**: Implementar ferramentas de **Self-Healing** ou utilizar o `AIAssistant` do Playwright para sugerir correções automáticas de seletores.
+
+#### 5. Dashboard de Qualidade Consolidado
+- **Oportunidade**: Ter uma visão histórica da qualidade ao longo de meses, e não apenas por execução.
+- **Ação**: Implementar o **Allure TestOps** ou **ReportPortal** para armazenar e analisar tendências de falhas e tempo de execução.
+
+---
+*Roadmap atualizado conforme a evolução técnica do projeto.*
