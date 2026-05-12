@@ -8,11 +8,8 @@ test.describe('@ui Testes de Acessibilidade', () => {
   test('página de login não deve ter violações de acessibilidade críticas', async ({ loginPage, page }) => {
     await loginPage.navigate();
     
-    const accessibilityScanResults = await new AxeBuilder({ page })
-      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
-      .analyze();
+    const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
 
-    // Se houver violações, eu falho o teste mas exibo apenas o resumo para não travar o terminal
     if (accessibilityScanResults.violations.length > 0) {
       const summary = accessibilityScanResults.violations.map(v => v.id).join(', ');
       expect(accessibilityScanResults.violations.length, `Foram encontradas violações de acessibilidade nas regras: ${summary}`).toBe(0);
