@@ -1,5 +1,6 @@
 import { test, expect } from '../../src/fixtures/test.fixture';
 import { env } from '../../config/environments';
+import * as allure from 'allure-js-commons';
 
 test.describe('@ui Testes de Autenticação UI', () => {
   test.use({ storageState: { cookies: [], origins: [] } });

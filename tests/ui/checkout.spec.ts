@@ -1,6 +1,7 @@
 import { test, expect } from '../../src/fixtures/test.fixture';
 import { env } from '../../config/environments';
 import { faker } from '@faker-js/faker';
+import * as allure from 'allure-js-commons';
 
 test.describe('@ui Testes de Fluxo de Checkout', () => {
   test.beforeEach(async ({ loginPage, inventoryPage }) => {

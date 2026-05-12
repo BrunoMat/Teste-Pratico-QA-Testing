@@ -2,6 +2,7 @@ import { test, expect } from '../../src/fixtures/test.fixture';
 import { BookingBuilder } from '../../src/builders/BookingBuilder';
 import { env } from '../../config/environments';
 import { z } from 'zod';
+import * as allure from 'allure-js-commons';
 
 const BookingSchema = z.object({
   firstname: z.string(),
