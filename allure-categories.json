@@ -1,0 +1,27 @@
+[
+  {
+    "name": "♿ Violações de Acessibilidade",
+    "matchedStatuses": ["failed"],
+    "messageRegex": ".*accessibility.*|.*axe-core.*"
+  },
+  {
+    "name": "⚡ Falhas de Performance (SLA)",
+    "matchedStatuses": ["failed"],
+    "messageRegex": ".*SLA.*|.*performance.*|.*duration.*"
+  },
+  {
+    "name": "🛡️ Falhas de Segurança",
+    "matchedStatuses": ["failed"],
+    "messageRegex": ".*security.*|.*forbidden.*|.*403.*|.*unauthorized.*"
+  },
+  {
+    "name": "🔌 Quebra de Contrato (API)",
+    "matchedStatuses": ["failed"],
+    "messageRegex": ".*schema.*|.*contract.*|.*ZodError.*"
+  },
+  {
+    "name": "🖥️ Erros de Interface (UI)",
+    "matchedStatuses": ["failed"],
+    "messageRegex": ".*locator.*|.*visible.*|.*timeout.*|.*screenshot.*"
+  }
+]

@@ -1,0 +1,33 @@
+# Dependências
+node_modules/
+.npm/
+
+# Variáveis de Ambiente e Segredos
+.env
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+playwright/.auth/
+
+# Cucumber & Allure Reports
+reports/
+allure-results/
+allure-report/
+.features-gen/
+tests/features/api/reports
+tests/features/ui/reports
+reports
+
+# Sistema e IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+
+# Pasta de build e cache
+dist/
+build/
+.cache/

@@ -1,0 +1,86 @@
+name: Playwright Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+      
+    - name: Run Playwright tests
+      run: npm run test
+      env:
+        UI_BASE_URL: ${{ secrets.UI_BASE_URL }}
+        API_BASE_URL: ${{ secrets.API_BASE_URL }}
+        STANDARD_USER: ${{ secrets.STANDARD_USER }}
+        VALID_PASSWORD: ${{ secrets.VALID_PASSWORD }}
+        API_USERNAME: ${{ secrets.API_USERNAME }}
+        API_PASSWORD: ${{ secrets.API_PASSWORD }}
+        LOCKED_OUT_USER: ${{ secrets.LOCKED_OUT_USER }}
+        PROBLEM_USER: ${{ secrets.PROBLEM_USER }}
+        PERFORMANCE_GLITCH_USER: ${{ secrets.PERFORMANCE_GLITCH_USER }}
+      
+    - name: Generate Allure Report
+      run: npm run allure:generate
+      if: always()
+      
+    - name: Upload Allure Report Artifact
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: allure-report
+        path: allure-report/
+        retention-days: 30
+
+  deploy-pages:
+    if: always() && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    needs: test
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download Allure Report
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report
+          
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+        
+      - name: Upload artifact for Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: allure-report/
+          
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
