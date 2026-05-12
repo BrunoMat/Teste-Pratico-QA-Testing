@@ -87,6 +87,3 @@ Os testes de regressão visual (`visual.spec.ts`) podem falhar na primeira execu
 1. No GitHub Actions, baixe o artefato `test-results` da execução que falhou.
 2. Copie os arquivos da pasta `visual.spec.ts-snapshots` para o seu diretório local.
 3. Realize o commit dessas imagens. As execuções subsequentes ficarão "verdes".
-
----
-*Projeto desenvolvido como parte do desafio técnico para QA Engineer Senior.*
